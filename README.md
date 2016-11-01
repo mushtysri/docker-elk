@@ -5,16 +5,16 @@ Creating an ELK stack could not be easier.
 
 **Important:**
 
-* The `master` branch (image: `willdurand/elk:latest` or
-  `willdurand/elk:kibana-4.1.2`) currently contains an image with Kibana 4.1.2,
+* The `master` branch (image: `ayeluri/elk:latest` or
+  `ayeluri/elk:kibana-4.1.2`) currently contains an image with Kibana 4.1.2,
   Elasticsearch 1.x, and Logstash 1.x;
 * Branch
-  [`kibana-4.4.2`](https://github.com/willdurand/docker-elk/tree/kibana-4.4.2)
-  (image: `willdurand/elk:kibana-4.4.2`) provides Kibana 4.4.2, Elasticsearch
+  [`kibana-4.4.2`](https://github.com/vsay/docker-elk/tree/kibana-4.4.2)
+  (image: `ayeluri/elk:kibana-4.4.2`) provides Kibana 4.4.2, Elasticsearch
   2.2, and Logstash 2.2;
 * Branch
-  [`kibana-4.5.4`](https://github.com/willdurand/docker-elk/tree/kibana-4.5.4)
-  (image: `willdurand/elk:kibana-4.5.4`) provides Kibana 4.5.4, Elasticsearch
+  [`kibana-4.5.4`](https://github.com/vsay/docker-elk/tree/kibana-4.5.4)
+  (image: `ayeluri/elk:kibana-4.5.4`) provides Kibana 4.5.4, Elasticsearch
   2.3, and Logstash 2.3.
 
 
@@ -24,7 +24,7 @@ Quick Start
 ```
 $ docker run -p 8080:80 \
     -v /path/to/your/logstash/config:/etc/logstash \
-    willdurand/elk
+    ayeluri/elk
 ```
 
 Then, browse: [http://localhost:8080](http://localhost:8080) (replace
@@ -39,7 +39,7 @@ configuration.
 
 ``` yaml
 elk:
-    image: willdurand/elk
+    image: ayeluri/elk
     ports:
         - "8080:80"
     volumes:
@@ -64,7 +64,7 @@ Then, use it:
 $ docker run -p 8080:80 \
     -v /path/to/your/logstash/config:/etc/logstash \
     --volumes-from dataelk \
-    willdurand/elk
+    ayeluri/elk
 ```
 
 If you want to rely on the logstash agent for processing files, you have to
@@ -74,7 +74,7 @@ mount volumes as well, but you should rather only send logs to this container.
 
 ``` yaml
 elk:
-    image: willdurand/elk
+    image: ayeluri/elk
     ports:
         - "8080:80"
     volumes:
@@ -98,7 +98,7 @@ Forwarder](https://github.com/willdurand/docker-logstash-forwarder):
 
 ``` yaml
 elk:
-    image: willdurand/elk
+    image: ayeluri/elk
     ports:
         - "80:80"
         - "XX.XX.XX.XX:5043:5043"
