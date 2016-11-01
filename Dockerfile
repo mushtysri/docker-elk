@@ -1,5 +1,5 @@
 FROM java:8
-MAINTAINER William Durand <william.durand1@gmail.com>
+MAINTAINER Ajay Yeluri <ayeluri@gmail.com>
 
 ARG DEBIAN_FRONTEND=noninteractive
 
