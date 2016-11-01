@@ -14,7 +14,7 @@ Kibana actually is a backend offering several tools for log analysis.
 To see a working example with docker-compose, download the sources from my GitHub. You are also free to
 
 ```
-$ git clone https://github.com/xetys/microservices-example.git
+$ git clone https://github.com/VSAY/docker-elk.git
 ```
 and contribute.
 
@@ -41,9 +41,7 @@ This is quite easy, because with codec json logstash automatically knows how to 
 
 This file has to be applied in this Dockerfile
 ```
-FROM willdurand/elk
-
-
+FROM ayeluri/elk
 COPY logstash-spring-cloud.conf /etc/logstash/logstash-spring-cloud.conf
 ```
 
@@ -95,11 +93,20 @@ Note that every instance now links elk. Exposing port 9200 is optinally, if you 
 
 So if we start the cloud now, we will have a fully running ELK-Stack without collecting any logs.
 
-To make this happen, we just have to add
-
+To make this happen, we just have to add the below dependencies 
+#### Gradle 
+```
 compile('net.logstash.logback:logstash-logback-encoder:3.5')
-
-to our gradle depencies in each service, and also a logback configuration:
+```
+#### Maven
+```
+        <dependency>
+            <groupId>net.logstash.logback</groupId>
+            <artifactId>logstash-logback-encoder</artifactId>
+            <versoion>3.5</version>
+        </dependency>
+```
+to our depencies in each service, and also a logback configuration:
 src/main/resources/logback.xml
 ```
 <?xml version="1.0" encoding="UTF-8"?>
