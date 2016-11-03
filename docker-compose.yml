@@ -5,7 +5,7 @@ elk:
         - "8080:80"
         - "5000:5000"
     volumes:
-        - etc/logstash/config:/etc/logstash
+        - etc/logstash/conf:/etc/logstash
     volumes_from:
         - dataelk
 
