@@ -1,16 +1,13 @@
-version: '2'
-services:
-    elk:
-        image: ayeluri/elk
-        ports:
-            - "8080:80"
-            - "5000:5000"
-        volumes:
-            - ./etc/logstash/conf:/etc/logstash
-        volumes_from:
-            - dataelk
-
-    dataelk:
-        image: busybox
-        volumes:
-            - ./data
+elk:
+    image: ayeluri/elk
+    ports:
+        - "8080:80"
+        - "5000:5000"
+    volumes:
+        - ./etc/logstash/conf:/etc/logstash
+#    volumes_from:
+#        - dataelk
+#dataelk:
+#    image: busybox
+#    volumes:
+#       - ./data
