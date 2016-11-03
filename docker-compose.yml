@@ -1,7 +1,7 @@
 elk:
     image: ayeluri/elk
     ports:
-        - "8080:80"
+        - "8088:80"
         - "5000:5000"
     volumes:
         - ./etc/logstash/conf:/etc/logstash
