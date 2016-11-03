@@ -7,10 +7,10 @@ services:
             - "5000:5000"
         volumes:
             - etc/logstash/conf:/etc/logstash
-        volumes_from:
-            - dataelk
+#        volumes_from:
+#            - dataelk
 
-    dataelk:
-        image: busybox
-        volumes:
-            - /data
+#    dataelk:
+#        image: busybox
+#        volumes:
+#            - /data
