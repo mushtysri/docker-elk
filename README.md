@@ -22,7 +22,7 @@ Quick Start
 -----------
 
 ```
-$ docker run -p 8080:80 \
+$ docker run -p 5601:5601 \
     -v /path/to/your/logstash/config:/etc/logstash \
     ayeluri/elk
 ```
@@ -37,11 +37,15 @@ configuration.
 
 ### Compose Configuration
 
+Ref to the docker-compose.yml file 
+To Create your own see below 
+
 ``` yaml
 elk:
     image: ayeluri/elk
     ports:
-        - "8080:80"
+        - "5601:5601"
+        - "5000:5000"
     volumes:
         - /path/to/your/logstash/config:/etc/logstash
 ```
@@ -61,7 +65,7 @@ $ docker run -d -v /data --name dataelk busybox
 Then, use it:
 
 ```
-$ docker run -p 8080:80 \
+$ docker run -p 5601:5601 \
     -v /path/to/your/logstash/config:/etc/logstash \
     --volumes-from dataelk \
     ayeluri/elk
