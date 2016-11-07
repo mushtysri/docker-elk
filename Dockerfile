@@ -38,7 +38,7 @@ RUN \
 
 ADD etc/supervisor/conf.d/kibana.conf /etc/supervisor/conf.d/kibana.conf
 
-EXPOSE 80
+EXPOSE 5601 
 
 ENV PATH /opt/logstash/bin:$PATH
 
