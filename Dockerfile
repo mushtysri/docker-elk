@@ -10,18 +10,18 @@ RUN apt-get update && \
 # Elasticsearch
 RUN \
     wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.0.0.deb && \
-    sudo dpkg -i elasticsearch-5.0.0.deb && \
-    sudo update-rc.d elasticsearch defaults 95 10 && \
-    sudo /etc/init.d/elasticsearch start    
+    dpkg -i elasticsearch-5.0.0.deb && \
+    update-rc.d elasticsearch defaults 95 10 && \
+    /etc/init.d/elasticsearch start    
     
 #ADD etc/supervisor/conf.d/elasticsearch.conf /etc/supervisor/conf.d/elasticsearch.conf
 
 # Logstash
 RUN \
     wget https://artifacts.elastic.co/downloads/logstash/logstash-5.0.0.deb && \
-    sudo dpkg -i logstash-5.0.0.deb && \
-    sudo update-rc.d logstash defaults 95 10 && \
-    sudo /etc/init.d/logstash start    
+    dpkg -i logstash-5.0.0.deb && \
+    update-rc.d logstash defaults 95 10 && \
+    /etc/init.d/logstash start    
 
 # Logstash plugins
 RUN /opt/logstash/bin/plugin install logstash-filter-translate
