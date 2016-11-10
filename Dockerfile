@@ -9,21 +9,21 @@ RUN apt-get update && \
 
 # Elasticsearch
 RUN \
-    wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.0.0.deb && \
-    dpkg -i elasticsearch-5.0.0.deb && \
-    update-rc.d elasticsearch defaults 95 10 && \
-    /etc/init.d/elasticsearch start    
-    
-
-# Logstash
-RUN \
-    curl -s https://artifacts.elastic.co/downloads/logstash/logstash-5.0.0.tar.gz | tar -C /opt -xz && \
-    ln -s /opt/logstash-5.0.0 /opt/logstash
+    curl -s https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.0.0.tar.gz | tar -C /usr/share -xz &&\
+    ln -s /usr/share/elasticsearch-5.0.0 /usr/share/elasticsearch
 
 ADD etc/supervisor/conf.d/logstash.conf /etc/supervisor/conf.d/elasticsearch.conf
 
+
+# Logstash
+RUN \
+    curl -s https://artifacts.elastic.co/downloads/logstash/logstash-5.0.0.tar.gz | tar -C /usr/share -xz && \
+    ln -s /usr/share/logstash-5.0.0 /usr/share/logstash
+
+ADD etc/supervisor/conf.d/logstash.conf /etc/supervisor/conf.d/logstash.conf
+
 # Logstash plugins
-RUN /opt/logstash/bin/logstash-plugin install logstash-filter-translate
+RUN /usr/share/logstash/bin/logstash-plugin install logstash-filter-translate
 
 
 # Kibana
