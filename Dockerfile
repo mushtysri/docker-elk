@@ -23,7 +23,7 @@ RUN \
 ADD etc/supervisor/conf.d/logstash.conf /etc/supervisor/conf.d/elasticsearch.conf
 
 # Logstash plugins
-RUN /usr/share/logstash/bin/plugin install logstash-filter-translate
+RUN /usr/share/logstash/bin/logstash-plugin install logstash-filter-translate
 
 
 # Kibana
