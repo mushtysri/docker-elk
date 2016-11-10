@@ -14,17 +14,16 @@ RUN \
     update-rc.d elasticsearch defaults 95 10 && \
     /etc/init.d/elasticsearch start    
     
-#ADD etc/supervisor/conf.d/elasticsearch.conf /etc/supervisor/conf.d/elasticsearch.conf
 
 # Logstash
 RUN \
     wget https://artifacts.elastic.co/downloads/logstash/logstash-5.0.0.deb && \
-    dpkg -i logstash-5.0.0.deb && \
-    update-rc.d logstash defaults 95 10 && \
-    /etc/init.d/logstash start    
+    dpkg -i logstash-5.0.0.deb    
+
+ADD etc/supervisor/conf.d/logstash.conf /etc/supervisor/conf.d/elasticsearch.conf
 
 # Logstash plugins
-RUN /opt/logstash/bin/plugin install logstash-filter-translate
+RUN /usr/share/logstash/bin/plugin install logstash-filter-translate
 
 
 # Kibana
