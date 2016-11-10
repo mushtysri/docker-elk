@@ -9,32 +9,30 @@ RUN apt-get update && \
 
 # Elasticsearch
 RUN \
-    apt-key adv --keyserver pool.sks-keyservers.net --recv-keys 46095ACC8548582C1A2699A9D27D666CD88E42B4 && \
-    if ! grep "elasticsearch" /etc/apt/sources.list; then echo "deb http://packages.elasticsearch.org/elasticsearch/1.4/debian stable main" >> /etc/apt/sources.list;fi && \
-    if ! grep "logstash" /etc/apt/sources.list; then echo "deb http://packages.elasticsearch.org/logstash/1.5/debian stable main" >> /etc/apt/sources.list;fi && \
-    apt-get update && \
-    apt-get install --no-install-recommends -y elasticsearch && \
-    apt-get clean && \
-    sed -i '/#cluster.name:.*/a cluster.name: logstash' /etc/elasticsearch/elasticsearch.yml && \
-    sed -i '/#path.data: \/path\/to\/data/a path.data: /data' /etc/elasticsearch/elasticsearch.yml
-
-ADD etc/supervisor/conf.d/elasticsearch.conf /etc/supervisor/conf.d/elasticsearch.conf
+    wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.0.0.deb && \
+    sudo dpkg -i elasticsearch-5.0.0.deb && \
+    sudo update-rc.d elasticsearch defaults 95 10 && \
+    sudo /etc/init.d/elasticsearch start    
+    
+#ADD etc/supervisor/conf.d/elasticsearch.conf /etc/supervisor/conf.d/elasticsearch.conf
 
 # Logstash
-RUN apt-get install --no-install-recommends -y logstash && \
-    apt-get clean
-
-ADD etc/supervisor/conf.d/logstash.conf /etc/supervisor/conf.d/logstash.conf
+RUN \
+    wget https://artifacts.elastic.co/downloads/logstash/logstash-5.0.0.deb && \
+    sudo dpkg -i logstash-5.0.0.deb && \
+    sudo update-rc.d logstash defaults 95 10 && \
+    sudo /etc/init.d/logstash start    
 
 # Logstash plugins
 RUN /opt/logstash/bin/plugin install logstash-filter-translate
 
+
 # Kibana
 RUN \
-    curl -s https://download.elasticsearch.org/kibana/kibana/kibana-4.1.2-linux-x64.tar.gz | tar -C /opt -xz && \
-    ln -s /opt/kibana-4.1.2-linux-x64 /opt/kibana && \
+    curl -s https://artifacts.elastic.co/downloads/kibana/kibana-5.0.0-linux-x86_64.tar.gz | tar -C /opt -xz && \
+    ln -s /opt/kibana-5.0.0-linux-x86_64 /opt/kibana && \
 #    sed -i 's/port: 5601/port: 80/' /opt/kibana/config/kibana.yml
-    ls 
+    
 
 ADD etc/supervisor/conf.d/kibana.conf /etc/supervisor/conf.d/kibana.conf
 
