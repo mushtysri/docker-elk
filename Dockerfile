@@ -17,13 +17,13 @@ RUN \
 
 # Logstash
 RUN \
-    wget https://artifacts.elastic.co/downloads/logstash/logstash-5.0.0.deb && \
-    dpkg -i logstash-5.0.0.deb    
+    curl -s https://artifacts.elastic.co/downloads/logstash/logstash-5.0.0.tar.gz | tar -C /opt -xz && \
+    ln -s /opt/logstash-5.0.0 /opt/logstash
 
 ADD etc/supervisor/conf.d/logstash.conf /etc/supervisor/conf.d/elasticsearch.conf
 
 # Logstash plugins
-RUN /usr/share/logstash/bin/logstash-plugin install logstash-filter-translate
+RUN /opt/logstash/bin/logstash-plugin install logstash-filter-translate
 
 
 # Kibana
