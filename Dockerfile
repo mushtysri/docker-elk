@@ -18,7 +18,8 @@ ADD etc/supervisor/conf.d/logstash.conf /etc/supervisor/conf.d/elasticsearch.con
 # Logstash
 RUN \
     curl -s https://artifacts.elastic.co/downloads/logstash/logstash-5.0.0.tar.gz | tar -C /usr/share -xz && \
-    ln -s /usr/share/logstash-5.0.0 /usr/share/logstash
+    ln -s /usr/share/logstash-5.0.0 /usr/share/logstash && \
+    mkdir /var/log/logstash
 
 ADD etc/supervisor/conf.d/logstash.conf /etc/supervisor/conf.d/logstash.conf
 
