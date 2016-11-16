@@ -1,5 +1,5 @@
 elk:
-    image: ayeluri/elk
+    image: elk
     ports:
         - "5601:5601"
         - "6000:6000"
