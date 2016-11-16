@@ -52,9 +52,9 @@ mount volumes as well, but you should rather only send logs to this container.
 
 ### Compose Configuration
 
-``` yaml
+``` 
 elk:
-    image: ayeluri/elk
+    image: elk
     ports:
         - "8080:80"
     volumes:
@@ -76,9 +76,9 @@ You can use this image to run an ELK stack that receives logs from your
 production servers, using [Logstash
 Forwarder](https://github.com/willdurand/docker-logstash-forwarder):
 
-``` yaml
+``` 
 elk:
-    image: ayeluri/elk
+    image: elk
     ports:
         - "80:80"
         - "XX.XX.XX.XX:5043:5043"
@@ -96,18 +96,6 @@ dataelk:
 
 Note that the `5043` port is binded to a private IP address in this case, which
 is recommended. Kibana is publicly available though.
-
-Your `logstash` configuration SHOULD contain the following `input` definition:
-
-```
-input {
-  lumberjack {
-    port => 5043
-    ssl_certificate => "/etc/ssl/logstash-forwarder.crt"
-    ssl_key => "/etc/ssl/logstash-forwarder.key"
-  }
-}
-```
 
 
 Extend It
