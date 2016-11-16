@@ -12,7 +12,7 @@ RUN \
     curl -s https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.0.0.tar.gz | tar -C /usr/share -xz &&\
     ln -s /usr/share/elasticsearch-5.0.0 /usr/share/elasticsearch
 
-ADD etc/supervisor/conf.d/logstash.conf /etc/supervisor/conf.d/elasticsearch.conf
+ADD etc/supervisor/conf.d/elasticsearch.conf /etc/supervisor/conf.d/elasticsearch.conf
 
 
 # Logstash
@@ -33,7 +33,6 @@ RUN \
     ln -s /opt/kibana-5.0.0-linux-x86_64 /opt/kibana 
 #    sed -i 's/port: 5601/port: 80/' /opt/kibana/config/kibana.yml
     
-
 ADD etc/supervisor/conf.d/kibana.conf /etc/supervisor/conf.d/kibana.conf
 
 EXPOSE 5601 
