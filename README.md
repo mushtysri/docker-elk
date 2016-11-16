@@ -1,30 +1,17 @@
 Elasticsearch. Logstash. Kibana.
 ================================
 
-Creating an ELK stack could not be easier.
-
-**Important:**
-
-* The `master` branch (image: `ayeluri/elk:latest` or
-  `ayeluri/elk:kibana-4.1.2`) currently contains an image with Kibana 4.1.2,
-  Elasticsearch 1.x, and Logstash 1.x;
-* Branch
-  [`kibana-4.4.2`](https://github.com/vsay/docker-elk/tree/kibana-4.4.2)
-  (image: `ayeluri/elk:kibana-4.4.2`) provides Kibana 4.4.2, Elasticsearch
-  2.2, and Logstash 2.2;
-* Branch
-  [`kibana-4.5.4`](https://github.com/vsay/docker-elk/tree/kibana-4.5.4)
-  (image: `ayeluri/elk:kibana-4.5.4`) provides Kibana 4.5.4, Elasticsearch
-  2.3, and Logstash 2.3.
-
 
 Quick Start
 -----------
 
+Build the image 
 ```
-$ docker run -p 5601:5601 \
-    -v /path/to/your/logstash/config:/etc/logstash \
-    ayeluri/elk
+docker build --tag elk:latest .
+```
+Run it using docker compose 
+```
+docker-compose run -d --file docker-compose.yml 
 ```
 
 Then, browse: [http://localhost:8080](http://localhost:8080) (replace
@@ -38,17 +25,6 @@ configuration.
 ### Compose Configuration
 
 Ref to the docker-compose.yml file 
-To Create your own see below 
-
-``` yaml
-elk:
-    image: ayeluri/elk
-    ports:
-        - "5601:5601"
-        - "5000:5000"
-    volumes:
-        - /path/to/your/logstash/config:/etc/logstash
-```
 
 
 Data
