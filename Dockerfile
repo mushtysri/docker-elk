@@ -11,8 +11,10 @@ RUN apt-get update && \
 RUN \
     wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.0.0.deb && \
     dpkg -i elasticsearch-5.0.0.deb && \
-    update-rc.d elasticsearch defaults 95 10 && \
-    /etc/init.d/elasticsearch start  
+    update-rc.d elasticsearch defaults 95 10 
+
+ENTRYPOINT["/etc/init.d/elasticsearch","start"]
+
     
 #RUN \
 #    curl -s https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.0.0.tar.gz | tar -C /usr/share -xz &&\
